@@ -3,11 +3,8 @@ package com.usuario.converter;
 import com.usuario.dto.user.UserRequestDTO;
 import com.usuario.dto.user.UserResponseDTO;
 import com.usuario.entity.User;
-import com.usuario.entity.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
