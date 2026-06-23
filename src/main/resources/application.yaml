@@ -11,5 +11,5 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  secret: SuaChaveSecretaMuitoLonga1234567890ABCDEFGHIJ
+  secret-key: SuaChaveSecretaMuitoLonga1234567890ABCDEFGHIJ
   expiration: 86400000
