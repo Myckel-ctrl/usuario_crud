@@ -25,23 +25,28 @@ public class PhoneService {
     private final JwtUtil jwtUtil;
 
     @Transactional
-    public PhoneResponseDTO createPhone(String token, PhoneRequestDTO phoneRequestDTO) {
+    public PhoneResponseDTO createPhone(String token, PhoneRequestDTO requestDTO) {
         User user = getAuthenticatedUser(token);
-        Phone phone = phoneConverter.toPhoneEntity(phoneRequestDTO);
+
+        Phone phone = phoneConverter.toPhoneEntity(requestDTO);
+
         phone.setUser(user);
+
         Phone savedPhone = phoneRepository.save(phone);
+
         return phoneConverter.toPhoneDTO(savedPhone);
     }
 
     @Transactional
-    public PhoneResponseDTO updatePhone(Long phoneId, String token, PhoneRequestDTO phoneRequestDTO) {
+    public PhoneResponseDTO updatePhone(Long phoneId, String token, PhoneRequestDTO requestDTO) {
         User user = getAuthenticatedUser(token);
+
         Phone phone = findPhoneById(phoneId);
 
         validatePhoneOwner(phone, user);
 
-        phone.setNumber(phoneRequestDTO.getNumber() != null ? phoneRequestDTO.getNumber() : phone.getNumber());
-        phone.setType(phoneRequestDTO.getType() != null ? phoneRequestDTO.getType() : phone.getType());
+        phone.setNumber(requestDTO.getNumber() != null ? requestDTO.getNumber() : phone.getNumber());
+        phone.setType(requestDTO.getType() != null ? requestDTO.getType() : phone.getType());
 
         return phoneConverter.toPhoneDTO(phoneRepository.save(phone));
     }
@@ -49,8 +54,11 @@ public class PhoneService {
     @Transactional
     public void deletePhone(Long phoneId, String token) {
         User user = getAuthenticatedUser(token);
+
         Phone phone = findPhoneById(phoneId);
+
         validatePhoneOwner(phone, user);
+
         phoneRepository.delete(phone);
     }
 
@@ -73,3 +81,4 @@ public class PhoneService {
         }
     }
 }
+

@@ -28,6 +28,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponseDTO findAuthenticatedUser(String token) {
         String email = jwtUtil.extractUsername(token.substring(7));
+
         User user = userRepository.findByEmail(email).
                 orElseThrow(() -> new ResourceNotFoundException("User not found."));
 
@@ -35,17 +36,18 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO updateAuthenticatedUser(String token, UserRequestDTO userRequestDTO) {
+    public UserResponseDTO updateAuthenticatedUser(String token, UserRequestDTO requestDTO) {
         String email = jwtUtil.extractUsername(token.substring(7));
+
         User user = userRepository.findByEmail(email).
                 orElseThrow(() -> new ResourceNotFoundException("User not found."));
 
-        validateEmailUpdate(userRequestDTO.getEmail(), user.getEmail());
+        validateEmailUpdate(requestDTO.getEmail(), user.getEmail());
 
-        user.setName(userRequestDTO.getName() != null ? userRequestDTO.getName() : user.getName());
-        user.setEmail(userRequestDTO.getEmail() != null ? userRequestDTO.getEmail() : user.getEmail());
-        user.setPassword(userRequestDTO.getPassword() != null ?
-                passwordEncoder.encode(userRequestDTO.getPassword()) : user.getPassword());
+        user.setName(requestDTO.getName() != null ? requestDTO.getName() : user.getName());
+        user.setEmail(requestDTO.getEmail() != null ? requestDTO.getEmail() : user.getEmail());
+        user.setPassword(requestDTO.getPassword() != null ?
+                passwordEncoder.encode(requestDTO.getPassword()) : user.getPassword());
 
         return userConverter.toUserDTO(userRepository.save(user));
     }
@@ -53,6 +55,7 @@ public class UserService {
     @Transactional
     public void deleteAuthenticatedUser(String token) {
         String email = jwtUtil.extractUsername(token.substring(7));
+
         User user = userRepository.findByEmail(email).
                 orElseThrow(() -> new ResourceNotFoundException("User not found."));
 
@@ -76,21 +79,21 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO) {
+    public UserResponseDTO updateUserById(Long id, UserRequestDTO requestDTO) {
         User user = findUserEntityById(id);
 
-        validateEmailUpdate(userRequestDTO.getEmail(), user.getEmail());
+        validateEmailUpdate(requestDTO.getEmail(), user.getEmail());
 
-        user.setName(userRequestDTO.getName() != null ? userRequestDTO.getName() : user.getName());
-        user.setEmail(userRequestDTO.getEmail() != null ? userRequestDTO.getEmail() : user.getEmail());
-        user.setPassword(userRequestDTO.getPassword() != null ?
-                passwordEncoder.encode(userRequestDTO.getPassword()) : user.getPassword());
+        user.setName(requestDTO.getName() != null ? requestDTO.getName() : user.getName());
+        user.setEmail(requestDTO.getEmail() != null ? requestDTO.getEmail() : user.getEmail());
+        user.setPassword(requestDTO.getPassword() != null ?
+                passwordEncoder.encode(requestDTO.getPassword()) : user.getPassword());
 
         return userConverter.toUserDTO(userRepository.save(user));
     }
 
     @Transactional
-    public void deleteUser(Long id) {
+    public void deleteUserById(Long id) {
         User user = findUserEntityById(id);
 
         userRepository.delete(user);
@@ -112,4 +115,5 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + id));
     }
 }
+
 

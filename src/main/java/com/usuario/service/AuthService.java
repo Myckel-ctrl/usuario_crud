@@ -30,10 +30,15 @@ public class AuthService {
     @Transactional
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
         validateExistingEmail(userRequestDTO.getEmail());
+
         User user = userConverter.toUserEntity(userRequestDTO);
+
         user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+
         user.setRole(Role.ROLE_USER);
+
         User savedUser = userRepository.save(user);
+
         return userConverter.toUserDTO(savedUser);
     }
 
@@ -60,4 +65,5 @@ public class AuthService {
         }
     }
 }
+
 
