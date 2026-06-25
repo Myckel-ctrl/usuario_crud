@@ -24,12 +24,12 @@ public class AddressService {
     private final JwtUtil jwtUtil;
 
     @Transactional
-    public AddressResponseDTO create(String token, AddressRequestDTO request) {
-        User authenticatedUser = getAuthenticatedUser(token);
+    public AddressResponseDTO createAddress(String token, AddressRequestDTO request) {
+        User user = getAuthenticatedUser(token);
 
         Address address = addressConverter.toAddressEntity(request);
 
-        address.setUser(authenticatedUser);
+        address.setUser(user);
 
         Address savedAddress = addressRepository.save(address);
 
@@ -37,7 +37,7 @@ public class AddressService {
     }
 
     @Transactional
-    public AddressResponseDTO update(Long addressId, String token, AddressRequestDTO requestDTO) {
+    public AddressResponseDTO updateAddress(Long addressId, String token, AddressRequestDTO requestDTO) {
         User authenticatedUser = getAuthenticatedUser(token);
 
         Address address = findAddressById(addressId);
@@ -49,13 +49,12 @@ public class AddressService {
         address.setComplement(requestDTO.getComplement() != null ? requestDTO.getComplement() : address.getComplement());
         address.setCity(requestDTO.getCity() != null ? requestDTO.getCity() : address.getCity());
         address.setState(requestDTO.getState() != null ? requestDTO.getState() : address.getState());
-        address.setZipCode(requestDTO.getZipCode() != null ? requestDTO.getZipCode() : address.getZipCode());
-
+        address.setZipcode(requestDTO.getZipcode() != null ? requestDTO.getZipcode() : address.getZipcode());
         return addressConverter.toAddressDTO(addressRepository.save(address));
     }
 
     @Transactional
-    public void delete(Long addressId, String token) {
+    public void deleteAddress(Long addressId, String token) {
         User authenticatedUser = getAuthenticatedUser(token);
 
         Address address = findAddressById(addressId);

@@ -25,6 +25,6 @@ public class AddressRequestDTO {
     private String state;
 
     @Size(min = 8, max = 9)
-    private String zipCode;
+    private String zipcode;
 
 }

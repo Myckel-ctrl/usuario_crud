@@ -15,7 +15,7 @@ public class AddressConverter {
                 .complement(dto.getComplement())
                 .city(dto.getCity())
                 .state(dto.getState())
-                .zipCode(dto.getZipCode())
+                .zipcode(dto.getZipcode())
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class AddressConverter {
                 .complement(address.getComplement())
                 .city(address.getCity())
                 .state(address.getState())
-                .zipCode(address.getZipCode())
+                .zipcode(address.getZipcode())
                 .build();
     }
 }

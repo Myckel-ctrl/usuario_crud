@@ -19,7 +19,7 @@ public class AddressController {
     public ResponseEntity<AddressResponseDTO> createAddress(@RequestHeader("Authorization") String token,
                                                      @Valid @RequestBody AddressRequestDTO request) {
 
-        return ResponseEntity.ok(addressService.create(token, request));
+        return ResponseEntity.ok(addressService.createAddress(token, request));
     }
 
     @PutMapping("/{id}")
@@ -27,14 +27,14 @@ public class AddressController {
                                                      @RequestHeader("Authorization") String token,
                                                      @Valid @RequestBody AddressRequestDTO request) {
 
-        return ResponseEntity.ok(addressService.update(id, token, request));
+        return ResponseEntity.ok(addressService.updateAddress(id, token, request));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id,
                                        @RequestHeader("Authorization") String token) {
 
-        addressService.delete(id, token);
+        addressService.deleteAddress(id, token);
 
         return ResponseEntity.noContent().build();
     }

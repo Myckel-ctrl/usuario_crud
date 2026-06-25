@@ -31,7 +31,7 @@ public class Address {
     private String state;
 
     @Column(nullable = false, length = 9)
-    private String zipCode;
+    private String zipcode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

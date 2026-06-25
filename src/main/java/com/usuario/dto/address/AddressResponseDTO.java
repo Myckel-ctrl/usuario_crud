@@ -14,5 +14,5 @@ public class AddressResponseDTO {
     private String complement;
     private String city;
     private String state;
-    private String zipCode;
+    private String zipcode;
 }
