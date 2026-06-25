@@ -14,8 +14,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PhoneRequestDTO {
 
-    @NotBlank
     private String number;
+
     @NotNull
     private PhoneType type;
+
 }

@@ -13,11 +13,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AddressRequestDTO {
 
-    @NotBlank
     private String street;
-    @NotBlank private String number;
+
+    private String number;
+
     private String complement;
-    @NotBlank private String city;
-    @NotBlank @Size(min = 2, max = 2) private String state;
-    @NotBlank @Size(min = 8, max = 9) private String zipCode;
+
+    private String city;
+
+    @Size(min = 2, max = 2)
+    private String state;
+
+    @Size(min = 8, max = 9)
+    private String zipCode;
+
 }
