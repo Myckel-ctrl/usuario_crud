@@ -141,7 +141,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user_db
     username: postgres
-    password: 1234
+    password: sua_senha
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -236,7 +236,11 @@ POST /auth/login
 GET    /users/me
 PUT    /users/me
 DELETE /users/me
+```
 
+## Admin User
+
+```
 GET    /users
 GET    /users/{id}
 PUT    /users/{id}
@@ -247,7 +251,6 @@ DELETE /users/{id}
 
 ```
 POST   /addresses
-GET    /addresses
 GET    /addresses/{id}
 PUT    /addresses/{id}
 DELETE /addresses/{id}
@@ -257,7 +260,6 @@ DELETE /addresses/{id}
 
 ```
 POST   /phones
-GET    /phones
 GET    /phones/{id}
 PUT    /phones/{id}
 DELETE /phones/{id}
@@ -268,6 +270,19 @@ DELETE /phones/{id}
 # 🎯 Objetivo
 
 Este projeto foi desenvolvido para aprofundar conhecimentos em desenvolvimento Backend com Java e Spring Boot, aplicando conceitos utilizados em aplicações reais, como autenticação JWT, autorização baseada em papéis, arquitetura em camadas, boas práticas de organização de código e persistência de dados com Spring Data JPA.
+
+## Intellij
+
+![Intellij](screenshots/intellij.png)
+
+## Postman
+
+![Postman](screenshots/postman.png)
+
+## Postgres
+
+![Postgres](screenshots/db.png)
+
 
 ---
 
